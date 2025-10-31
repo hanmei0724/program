@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能健康管理APP用户调研 - 人机交互实验</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --primary-light: #C8E6C9;
+            --secondary-color: #2196F3;
+            --accent-color: #FF9800;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --text-color: #424242;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        nav {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            color: var(--dark-color);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        section {
+            padding: 4rem 0;
+            background-color: white;
+            margin-bottom: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .member {
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            width: 250px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid var(--primary-light);
+        }
+
+        .project-details {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-details h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-details h3 i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .project-details ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .interview-content, .questionnaire-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .interview-theme, .questionnaire-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .interview-theme h3, .questionnaire-section h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .interview-theme h3 i, .questionnaire-section h3 i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .question-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .question-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .option {
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        .contribution {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contrib-item {
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            width: 300px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .contrib-item h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            .team-members, .contribution {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .member, .contrib-item {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .tab-container {
+            margin-top: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--light-color);
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background-color: var(--light-color);
+            border: none;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-right: 0.5rem;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .highlight {
+            background-color: var(--primary-light);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 数据表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .data-table tr:hover {
+            background-color: var(--primary-light);
+        }
+
+        .interview-data {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .interview-data h4 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .interview-data h4 i {
+            margin-right: 0.5rem;
+        }
+
+        .interview-qa {
+            margin-bottom: 1rem;
+        }
+
+        .interview-question {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .interview-answer {
+            margin-left: 1rem;
+            color: var(--text-color);
+        }
+
+        .data-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .summary-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--light-color);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .summary-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin: 2rem 0;
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+        /* 数据分析部分样式 */
+        .analysis-section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .analysis-section h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .analysis-section h3 i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .analysis-section h4 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .interview-insights, .questionnaire-insights, .recommendations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .insight-card, .recommendation-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .insight-card h4, .recommendation-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .insight-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .insight-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .insight-item h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section ul, .analysis-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section li {
+            margin-bottom: 0.5rem;
+        }
+        /* 亲和图样式 */
+        .affinity-process {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin: 1.5rem 0;
+        }
+
+        .affinity-process h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .affinity-process ol {
+            margin-left: 1.5rem;
+        }
+
+        .affinity-process li {
+            margin-bottom: 0.5rem;
+        }
+
+        .affinity-diagram {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+        }
+
+        .theme-group {
+            margin-bottom: 1.5rem;
+            border: 1px dashed #666;
+            padding: 1rem;
+            border-radius: var(--radius);
+        }
+
+        .theme-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            background-color: var(--primary-light);
+            padding: 0.5rem;
+            border-radius: 4px;
+            color: var(--primary-dark);
+        }
+
+        .note {
+            display: inline-block;
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            margin: 0.25rem;
+            border-radius: 4px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* 数据分析部分样式 */
+        .analysis-section {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .analysis-section h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .analysis-section h3 i {
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .analysis-section h4 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .interview-insights, .questionnaire-insights, .recommendations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .insight-card, .recommendation-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent-color);
+        }
+
+        .insight-card h4, .recommendation-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .insight-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .insight-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .insight-item h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section ul, .analysis-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-section li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>智能健康管理APP用户调研</h1>
+        <p>人机交互实验课项目 - 深入了解用户对健康管理类APP的需求与使用习惯</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#team" class="active">团队介绍</a></li>
+            <li><a href="#project">项目简介</a></li>
+            <li><a href="#interview">访谈数据</a></li>
+            <li><a href="#survey">调查数据</a></li>
+            <li><a href="#analysis">数据分析</a></li>
+            <li><a href="#contribution">贡献说明</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container">
+    <section id="team">
+        <h2 class="section-title">团队介绍</h2>
+        <div class="team-members">
+            <div class="member">
+                <img src="https://via.placeholder.com/150/4CAF50/FFFFFF?text=陈" alt="陈静雯">
+                <h3>陈静雯</h3>
+                <p>学号: 202200130048</p>
+                <p>负责访谈脚本撰写与访谈记录，编写网站</p>
+            </div>
+            <div class="member">
+                <img src="https://via.placeholder.com/150/2196F3/FFFFFF?text=周" alt="周佳慧">
+                <h3>周佳慧</h3>
+                <p>学号: 202200130004</p>
+                <p>负责全部的内容审核与修改，编写网站</p>
+            </div>
+            <div class="member">
+                <img src="https://via.placeholder.com/150/FF9800/FFFFFF?text=姚" alt="姚思彤">
+                <h3>姚思彤</h3>
+                <p>学号: 202200130281</p>
+                <p>负责调查问卷设计与数据收集分析</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="project">
+        <h2 class="section-title">项目简介</h2>
+        <div class="project-details">
+            <h3><i class="fas fa-heartbeat"></i> 项目背景</h3>
+            <p>随着健康意识的提升和移动互联网的普及，健康管理类APP已成为人们日常生活中重要的健康助手。然而，市场上同类产品众多，用户需求各异，如何设计出真正满足用户需求的健康管理APP成为关键问题。</p>
+
+            <h3><i class="fas fa-bullseye"></i> 项目目标</h3>
+            <p>本项目旨在通过用户调研，深入了解用户对健康管理类APP的需求、使用习惯与痛点，为后续产品设计和优化提供数据支持和决策依据。</p>
+
+            <h3><i class="fas fa-search"></i> 研究方法</h3>
+            <ul>
+                <li><span class="highlight">半结构化访谈</span>：与4名典型用户进行深入交流，获取定性数据</li>
+                <li><span class="highlight">问卷调查</span>：收集12份有效问卷，获取定量数据</li>
+                <li><span class="highlight">数据分析</span>：综合定性与定量数据，提炼用户需求与产品优化方向</li>
+            </ul>
+
+            <h3><i class="fas fa-chart-line"></i> 预期成果</h3>
+            <p>通过本次调研，我们希望明确健康管理APP的核心用户群体、关键使用场景、功能优先级以及用户体验优化方向，为产品设计提供科学依据。</p>
+        </div>
+    </section>
+
+    <section id="interview">
+        <h2 class="section-title">访谈数据</h2>
+        <div class="interview-content">
+            <p style="text-align: center; margin-bottom: 2rem;">我们成功完成了对4名潜在用户的深度访谈，以下是详细的访谈记录：</p>
+
+            <div class="interview-data">
+                <h4><i class="fas fa-user"></i> 访谈对象1：张女士，28岁，办公室职员</h4>
+                <div class="interview-qa">
+                    <div class="interview-question">介绍部分</div>
+                    <div class="interview-answer">"您好，感谢您参与本次访谈。我是XX，今天将由我进行访谈。我们正在进行一项关于健康管理APP的用户研究，部分问题可能涉及您的日常生活与健康习惯。如果您对任何问题感到不适，可以随时跳过。访谈内容仅用于研究，我们会严格保密。请问是否可以录音？结束后我会向您详细介绍研究背景。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您平时关注自己的健康状况吗？通常通过什么方式？</div>
+                    <div class="interview-answer">"比较关注，主要是通过定期体检和记录日常运动数据。我每周会去健身房2-3次，使用Keep记录运动情况。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您目前使用过哪些健康或运动类APP？</div>
+                    <div class="interview-answer">"主要使用Keep和苹果健康，偶尔也会用薄荷健康记录饮食。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">1. 您最初是因为什么开始使用健康类APP的？（追问）能具体说说当时的情况吗？</div>
+                    <div class="interview-answer">"去年体检发现体重超标，医生建议我加强运动管理，所以开始使用Keep记录运动数据。具体来说，当时体重达到了65公斤，BMI超标，医生建议我每周至少运动150分钟。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">2. 您通常会在什么场景下使用这类APP？（追问）比如运动前、饭后、睡前？</div>
+                    <div class="interview-answer">"主要在运动前后使用，运动前查看教程制定计划，运动后记录数据。另外睡前会看一下当天的运动总结和睡眠监测数据。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">3. 您最常使用的功能是哪几个？为什么？</div>
+                    <div class="interview-answer">"主要是运动记录和饮食记录。运动记录帮助我了解每天消耗的卡路里，饮食记录让我更注意营养均衡。这两个功能结合使用，能帮我更好地控制体重。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">4. 您有没有遇到过使用中断或放弃的情况？是什么原因？</div>
+                    <div class="interview-answer">"有，去年有一段时间工作特别忙，连续两周没有记录。主要是因为加班太多，没有时间和精力去记录，后来慢慢就中断了。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">5. 如果您想推荐一个健康APP给朋友，您会怎么介绍它？</div>
+                    <div class="interview-answer">"我会说这是一个很实用的健康管理工具，特别是对于想要控制体重或者培养运动习惯的人。它的教程很详细，记录功能也很方便。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">6. 您觉得目前使用的APP在哪些方面做得不够好？（追问）能举个例子吗？</div>
+                    <div class="interview-answer">"数据同步有时候不太准确，比如我用手环记录步数，但APP上显示的步数总是比手环少。还有就是饮食记录的食物库不够全，很多中式菜品找不到。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">7. 您希望APP能新增什么功能来更好地帮助您管理健康？</div>
+                    <div class="interview-answer">"希望能有更精准的睡眠质量分析，以及与智能手环更紧密的数据同步。还有就是希望能根据我的运动数据给出更个性化的建议。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">8. 您是否愿意为高级功能付费？为什么？</div>
+                    <div class="interview-answer">"如果功能确实有价值，比如个性化健康建议或专业医生咨询，我愿意支付合理的费用。但现在的付费功能大多是去除广告或者一些花哨的主题，我觉得不值得。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">9. 您对数据隐私（如步数、睡眠记录）有什么担忧吗？</div>
+                    <div class="interview-answer">"有一定担忧，特别是健康数据比较敏感。希望APP能明确说明数据使用政策，并提供数据导出和删除功能。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">10. 您是否曾经因为APP的使用而改变过某个生活习惯？是怎样的变化？</div>
+                    <div class="interview-answer">"是的，我开始更加关注每天的步数，有意识地多走路。现在我会刻意选择走楼梯而不是电梯，午餐后也会散步15分钟。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">11. 请描述一次您使用健康APP时感到特别满意或沮丧的经历。</div>
+                    <div class="interview-answer">"最满意的是完成了一个30天运动挑战，APP给了我很详细的统计数据和成就徽章，很有成就感。沮丧的是有几次数据同步失败，丢失了运动记录，感觉白练了。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">12. 您觉得APP的界面设计是否清晰易懂？有哪些地方让您困惑？</div>
+                    <div class="interview-answer">"大部分界面还算清晰，但有些功能藏得太深，找起来很费劲。比如饮食记录的功能入口就不太明显，我花了很久才找到。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">13. 您是否愿意长期使用同一款健康APP？为什么？</div>
+                    <div class="interview-answer">"如果它能持续更新，保持数据准确性，并且不过度商业化，我愿意长期使用。毕竟重新适应一个新APP需要时间，而且历史数据迁移也很麻烦。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">14. 您认为健康APP在什么情况下会对您产生真正的影响？</div>
+                    <div class="interview-answer">"当它能提供个性化建议，并且数据准确可靠时。比如根据我的运动习惯和身体状况给出适合我的锻炼计划，或者在我懈怠时给出恰当的提醒和鼓励。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">15. 您认为该APP和其他同类型APP上有什么更吸引你的地方？</div>
+                    <div class="interview-answer">"Keep的运动教程很专业，界面也比较简洁。相比其他APP，它的社区氛围更好，可以看到很多用户的真实分享。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">结束部分</div>
+                    <div class="interview-answer">"感谢您的分享！我们即将结束访谈。您还有什么想补充的吗？或者有没有我们没谈到但您觉得重要的内容？再次感谢您的时间，后续我们会通过邮件发送一份小礼物以表谢意。"</div>
+                </div>
+            </div>
+
+            <div class="interview-data">
+                <h4><i class="fas fa-user"></i> 访谈对象2：李先生，35岁，IT工程师</h4>
+                <div class="interview-qa">
+                    <div class="interview-question">介绍部分</div>
+                    <div class="interview-answer">"您好，感谢您参与本次访谈。我是XX，今天将由我进行访谈。我们正在进行一项关于健康管理APP的用户研究，部分问题可能涉及您的日常生活与健康习惯。如果您对任何问题感到不适，可以随时跳过。访谈内容仅用于研究，我们会严格保密。请问是否可以录音？结束后我会向您详细介绍研究背景。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您平时关注自己的健康状况吗？通常通过什么方式？</div>
+                    <div class="interview-answer">"比较关注，主要是通过年度体检和日常的运动监测。因为工作性质需要长时间坐着，所以特别关注颈椎和腰椎的健康。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您目前使用过哪些健康或运动类APP？</div>
+                    <div class="interview-answer">"用过华为健康、小米运动和Zepp Life，主要配合手环使用。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">1. 您最初是因为什么开始使用健康类APP的？（追问）能具体说说当时的情况吗？</div>
+                    <div class="interview-answer">"主要是因为买了智能手环，需要配套的APP来查看数据。具体是两年前公司体检发现血脂偏高，医生建议多运动，就买了个手环开始记录。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">2. 您通常会在什么场景下使用这类APP？（追问）比如运动前、饭后、睡前？</div>
+                    <div class="interview-answer">"主要是早上起床后查看睡眠数据，晚上睡觉前查看当天的运动完成情况。运动时偶尔会看一下实时心率。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">3. 您最常使用的功能是哪几个？为什么？</div>
+                    <div class="interview-answer">"最常用的是步数统计、心率和睡眠监测。步数统计让我了解每天的活动量，心率监测在运动时很重要，睡眠监测帮助我改善睡眠质量。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">4. 您有没有遇到过使用中断或放弃的情况？是什么原因？</div>
+                    <div class="interview-answer">"有，去年用了三个月后就放弃了。主要原因是数据同步不准确，有时候运动数据没有及时更新，打击了积极性。还有就是APP更新后界面变得复杂，用起来不顺手。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">5. 如果您想推荐一个健康APP给朋友，您会怎么介绍它？</div>
+                    <div class="interview-answer">"我会说这是一个配合智能手环使用的好工具，可以帮你了解自己的运动量和睡眠质量，对于想要培养健康习惯的人很有帮助。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">6. 您觉得目前使用的APP在哪些方面做得不够好？（追问）能举个例子吗？</div>
+                    <div class="interview-answer">"数据准确性有待提高，比如睡眠监测，有时候我明明醒了还在记录深度睡眠。还有就是耗电量比较大，经常需要充电。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">7. 您希望APP能新增什么功能来更好地帮助您管理健康？</div>
+                    <div class="interview-answer">"希望增加久坐提醒功能，根据我的工作习惯定时提醒我起来活动。还有就是希望能整合更多的健康数据，比如体重、血压等。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">8. 您是否愿意为高级功能付费？为什么？</div>
+                    <div class="interview-answer">"如果功能确实有价值，比如个性化健康建议或专业医生咨询，我愿意支付合理的费用。但基础的数据记录功能应该免费。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">9. 您对数据隐私（如步数、睡眠记录）有什么担忧吗？</div>
+                    <div class="interview-answer">"有一定担忧，特别是健康数据比较敏感。希望APP能明确说明数据使用政策，并提供数据导出和删除功能。最好能有本地存储选项，不上传到云端。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">10. 您是否曾经因为APP的使用而改变过某个生活习惯？是怎样的变化？</div>
+                    <div class="interview-answer">"有的，开始注意每天走够一万步，也会关注自己的睡眠时间。现在会有意识地提前睡觉，保证7小时以上的睡眠。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">11. 请描述一次您使用健康APP时感到特别满意或沮丧的经历。</div>
+                    <div class="interview-answer">"满意的是有一次连续一周睡眠质量都很好，APP给出了积极的反馈，感觉很有成就感。沮丧的是有次爬山，手环没电了，一整天的运动数据都没记录上。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">12. 您觉得APP的界面设计是否清晰易懂？有哪些地方让您困惑？</div>
+                    <div class="interview-answer">"界面还算清晰，但功能太多，有些用不上。数据展示的图表有时候看不懂，特别是那些专业的心率变异性数据。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">13. 您是否愿意长期使用同一款健康APP？为什么？</div>
+                    <div class="interview-answer">"如果它能保持稳定，不经常改版，我愿意长期使用。毕竟数据积累很重要，换APP意味着丢失历史数据。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">14. 您认为健康APP在什么情况下会对您产生真正的影响？</div>
+                    <div class="interview-answer">"当数据准确可靠，并且能给出有意义的建议时。比如发现我睡眠质量下降，能分析原因并给出改善建议。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">15. 您认为该APP和其他同类型APP上有什么更吸引你的地方？</div>
+                    <div class="interview-answer">"华为健康与我的手机和手环兼容性好，数据同步稳定。相比其他APP，它的续航优化做得更好。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">结束部分</div>
+                    <div class="interview-answer">"感谢您的分享！我们即将结束访谈。您还有什么想补充的吗？或者有没有我们没谈到但您觉得重要的内容？再次感谢您的时间，后续我们会通过邮件发送一份小礼物以表谢意。"</div>
+                </div>
+            </div>
+
+            <div class="interview-data">
+                <h4><i class="fas fa-user"></i> 访谈对象3：王同学，22岁，大学生</h4>
+                <div class="interview-qa">
+                    <div class="interview-question">介绍部分</div>
+                    <div class="interview-answer">"您好，感谢您参与本次访谈。我是XX，今天将由我进行访谈。我们正在进行一项关于健康管理APP的用户研究，部分问题可能涉及您的日常生活与健康习惯。如果您对任何问题感到不适，可以随时跳过。访谈内容仅用于研究，我们会严格保密。请问是否可以录音？结束后我会向您详细介绍研究背景。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您平时关注自己的健康状况吗？通常通过什么方式？</div>
+                    <div class="interview-answer">"比较关注，主要是通过运动和控制饮食。我是学校篮球队的，所以对体能和体重比较在意。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您目前使用过哪些健康或运动类APP？</div>
+                    <div class="interview-answer">"主要用Keep和Nike Training Club，偶尔用薄荷健康记录饮食。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">1. 您最初是因为什么开始使用健康类APP的？（追问）能具体说说当时的情况吗？</div>
+                    <div class="interview-answer">"大一时想减肥，室友推荐了Keep。具体是当时体重有点超标，想通过运动减肥，但不知道怎么做，就下载了Keep跟着教程练习。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">2. 您通常会在什么场景下使用这类APP？（追问）比如运动前、饭后、睡前？</div>
+                    <div class="interview-answer">"主要在运动前后使用，运动前查看教程，运动后记录数据。有时候睡前也会看一下当天的运动总结。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">3. 您最常使用的功能是哪几个？为什么？</div>
+                    <div class="interview-answer">"最常用的是运动教程和饮食记录。运动教程很详细，适合我这种初学者；饮食记录帮助我控制热量摄入。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">4. 您有没有遇到过使用中断或放弃的情况？是什么原因？</div>
+                    <div class="interview-answer">"有，考试周的时候基本就停了，因为复习太忙没时间运动。还有就是寒暑假回家，环境变了就容易中断。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">5. 如果您想推荐一个健康APP给朋友，您会怎么介绍它？</div>
+                    <div class="interview-answer">"我会说这是一个很好的运动助手，特别是对于想要在家锻炼的人。教程很全面，从初级到高级都有。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">6. 您觉得目前使用的APP在哪些方面做得不够好？（追问）能举个例子吗？</div>
+                    <div class="interview-answer">"社交功能不够完善，想和同学一起运动但互动方式有限。还有就是有些高级功能需要付费，对学生来说有点贵。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">7. 您希望APP能新增什么功能来更好地帮助您管理健康？</div>
+                    <div class="interview-answer">"希望增加更多团体运动的功能，可以和同学一起完成挑战。还有就是希望能根据学生党的特点，提供一些适合在宿舍做的运动教程。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">8. 您是否愿意为高级功能付费？为什么？</div>
+                    <div class="interview-answer">"暂时不愿意，因为学生经济能力有限。如果以后工作了，可能会考虑付费，但现在免费功能已经够用了。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">9. 您对数据隐私（如步数、睡眠记录）有什么担忧吗？</div>
+                    <div class="interview-answer">"不太担忧，我觉得这些数据没什么敏感的。只要不泄露个人身份信息就行。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">10. 您是否曾经因为APP的使用而改变过某个生活习惯？是怎样的变化？</div>
+                    <div class="interview-answer">"有的，开始定期运动了，而且更注意饮食搭配。现在会刻意选择健康的食物，少吃外卖。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">11. 请描述一次您使用健康APP时感到特别满意或沮丧的经历。</div>
+                    <div class="interview-answer">"最满意的是完成了一个30天运动挑战，APP给了我很详细的统计数据和成就徽章，很有成就感。沮丧的是有几次数据同步失败，丢失了运动记录。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">12. 您觉得APP的界面设计是否清晰易懂？有哪些地方让您困惑？</div>
+                    <div class="interview-answer">"大部分界面还算清晰，但有些功能入口不太明显。个人中心设置太复杂，找了很久才找到修改目标的地方。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">13. 您是否愿意长期使用同一款健康APP？为什么？</div>
+                    <div class="interview-answer">"如果它能持续更新，保持数据准确性，我愿意长期使用。毕竟用习惯了，换新的还要重新适应。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">14. 您认为健康APP在什么情况下会对您产生真正的影响？</div>
+                    <div class="interview-answer">"当它能提供个性化建议，并且数据准确可靠时。比如根据我的运动习惯和身体状况给出适合我的锻炼计划。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">15. 您认为该APP和其他同类型APP上有什么更吸引你的地方？</div>
+                    <div class="interview-answer">"Keep的运动教程很专业，社区氛围也很好。相比其他APP，它的课程更系统，从入门到进阶都有。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">结束部分</div>
+                    <div class="interview-answer">"感谢您的分享！我们即将结束访谈。您还有什么想补充的吗？或者有没有我们没谈到但您觉得重要的内容？再次感谢您的时间，后续我们会通过邮件发送一份小礼物以表谢意。"</div>
+                </div>
+            </div>
+
+            <div class="interview-data">
+                <h4><i class="fas fa-user"></i> 访谈对象4：刘女士，42岁，教师</h4>
+                <div class="interview-qa">
+                    <div class="interview-question">介绍部分</div>
+                    <div class="interview-answer">"您好，感谢您参与本次访谈。我是XX，今天将由我进行访谈。我们正在进行一项关于健康管理APP的用户研究，部分问题可能涉及您的日常生活与健康习惯。如果您对任何问题感到不适，可以随时跳过。访谈内容仅用于研究，我们会严格保密。请问是否可以录音？结束后我会向您详细介绍研究背景。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您平时关注自己的健康状况吗？通常通过什么方式？</div>
+                    <div class="interview-answer">"比较关注，主要是通过定期体检和日常的步行锻炼。年纪大了，开始注意养生了。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">热身问题：您目前使用过哪些健康或运动类APP？</div>
+                    <div class="interview-answer">"用过微信运动和乐心运动，主要是记录步数。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">1. 您最初是因为什么开始使用健康类APP的？（追问）能具体说说当时的情况吗？</div>
+                    <div class="interview-answer">"同事都在用微信运动比拼步数，我也就跟着用了。具体是前年学校组织健步走活动，要求用APP记录，从那以后就养成了习惯。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">2. 您通常会在什么场景下使用这类APP？（追问）比如运动前、饭后、睡前？</div>
+                    <div class="interview-answer">"主要是晚饭后散步时记录步数，睡前看一下当天的排名。周末去公园锻炼时也会带着手机记录。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">3. 您最常使用的功能是哪几个？为什么？</div>
+                    <div class="interview-answer">"最常用的就是步数记录和排名功能。步数记录让我了解每天的活动量，排名功能增加了趣味性，可以和同事朋友比较。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">4. 您有没有遇到过使用中断或放弃的情况？是什么原因？</div>
+                    <div class="interview-answer">"有，有时候手机忘记带了，或者没电了，就会中断记录。还有就是旅游的时候，光顾着玩就忘了开APP。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">5. 如果您想推荐一个健康APP给朋友，您会怎么介绍它？</div>
+                    <div class="interview-answer">"我会说这是一个很好的督促自己运动的小工具，特别是微信运动，可以和朋友们互动，增加了运动的乐趣。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">6. 您觉得目前使用的APP在哪些方面做得不够好？（追问）能举个例子吗？</div>
+                    <div class="interview-answer">"界面有些复杂，很多功能用不上但占据了屏幕空间。另外，提醒功能过于频繁，有时候会觉得被打扰。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">7. 您希望APP能新增什么功能来更好地帮助您管理健康？</div>
+                    <div class="interview-answer">"希望增加更适合中老年人的运动教程，比如太极拳、广场舞之类的。还有就是健康提醒功能，比如提醒喝水、做眼保健操等。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">8. 您是否愿意为高级功能付费？为什么？</div>
+                    <div class="interview-answer">"不太愿意，我觉得基础功能已经够用了。而且我们这代人不太习惯为软件付费。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">9. 您对数据隐私（如步数、睡眠记录）有什么担忧吗？</div>
+                    <div class="interview-answer">"不太担忧，步数数据没什么敏感的。只要不泄露个人联系方式就行。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">10. 您是否曾经因为APP的使用而改变过某个生活习惯？是怎样的变化？</div>
+                    <div class="interview-answer">"是的，我开始更加关注每天的步数，有意识地多走路。现在我会刻意选择走楼梯而不是电梯，午餐后也会散步15分钟。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">11. 请描述一次您使用健康APP时感到特别满意或沮丧的经历。</div>
+                    <div class="interview-answer">"满意的是有一次走了两万多步，得了朋友圈第一名，很多朋友点赞。沮丧的是有次手机出了问题，一整天的步数都没记录上。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">12. 您觉得APP的界面设计是否清晰易懂？有哪些地方让您困惑？</div>
+                    <div class="interview-answer">"微信运动还算简单，但其他一些APP界面太花哨，功能太多找不到想要的。设置项太专业，有些看不懂。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">13. 您是否愿意长期使用同一款健康APP？为什么？</div>
+                    <div class="interview-answer">"如果它能持续更新，保持数据准确性，并且不过度商业化，我愿意长期使用。毕竟重新适应一个新APP需要时间。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">14. 您认为健康APP在什么情况下会对您产生真正的影响？</div>
+                    <div class="interview-answer">"当它能提供简单实用的功能，并且不增加使用负担时。我们中年人用这些APP主要是图个方便，太复杂了反而不会用。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">15. 您认为该APP和其他同类型APP上有什么更吸引你的地方？</div>
+                    <div class="interview-answer">"微信运动最大的优点是方便，不用单独下载APP，而且可以和微信好友互动，增加了趣味性。"</div>
+                </div>
+
+                <div class="interview-qa">
+                    <div class="interview-question">结束部分</div>
+                    <div class="interview-answer">"感谢您的分享！我们即将结束访谈。您还有什么想补充的吗？或者有没有我们没谈到但您觉得重要的内容？再次感谢您的时间，后续我们会通过邮件发送一份小礼物以表谢意。"</div>
+                </div>
+            </div>
+
+            <div class="data-summary">
+                <div class="summary-card">
+                    <h3>访谈完成</h3>
+                    <div class="number">4人</div>
+                    <p>深度访谈用户</p>
+                </div>
+                <div class="summary-card">
+                    <h3>访谈时长</h3>
+                    <div class="number">45-60分钟</div>
+                    <p>平均每人访谈时间</p>
+                </div>
+                <div class="summary-card">
+                    <h3>问题数量</h3>
+                    <div class="number">15个</div>
+                    <p>核心问题+追问</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="survey">
+        <h2 class="section-title">调查数据</h2>
+        <div class="questionnaire-content">
+            <p style="text-align: center; margin-bottom: 2rem;">我们收集了12份有效问卷，以下是数据汇总和分析：</p>
+
+            <div class="tab-container">
+                <div class="tabs">
+                    <button class="tab active" data-tab="rawdata">原始数据</button>
+                    <button class="tab" data-tab="analysis">数据分析</button>
+                    <button class="tab" data-tab="findings">主要发现</button>
+                </div>
+
+                <div class="tab-content active" id="rawdata-content">
+                    <h3 style="margin-bottom: 1rem;">调查问卷原始数据</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>性别</th>
+                                <th>年龄</th>
+                                <th>职业</th>
+                                <th>使用频率</th>
+                                <th>常用功能</th>
+                                <th>使用目的</th>
+                                <th>满意度</th>
+                                <th>帮助程度</th>
+                                <th>推荐意愿</th>
+                                <th>连接手环</th>
+                                <th>参加挑战</th>
+                                <th>关注隐私</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每天</td>
+                                <td>步数记录,睡眠监测,心率监测</td>
+                                <td>保持健康,数据记录</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>从不关注</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每天</td>
+                                <td>步数记录,睡眠监测,运动教程</td>
+                                <td>减肥,保持健康</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>偶尔查看</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每天</td>
+                                <td>步数记录,睡眠监测,心率监测</td>
+                                <td>保持健康,数据记录</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>偶尔查看</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每天</td>
+                                <td>步数记录,睡眠监测</td>
+                                <td>数据记录</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>是</td>
+                                <td>经常关注</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每周几次</td>
+                                <td>步数记录,运动教程</td>
+                                <td>运动激励,数据记录</td>
+                                <td>非常不满意</td>
+                                <td>完全没帮助</td>
+                                <td>非常不愿意</td>
+                                <td>不确定</td>
+                                <td>看奖励情况</td>
+                                <td>从不关注</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每周几次</td>
+                                <td>步数记录,睡眠监测,心率监测</td>
+                                <td>减肥,保持健康,数据记录</td>
+                                <td>非常不满意</td>
+                                <td>完全没帮助</td>
+                                <td>非常不愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>从不关注</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>女</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>很少使用</td>
+                                <td>步数记录,饮食记录</td>
+                                <td>减肥</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>偶尔查看</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>女</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>很少使用</td>
+                                <td>步数记录,睡眠监测,运动教程</td>
+                                <td>运动激励</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>从不关注</td>
+                            </tr>
+                            <!-- 新增的4份数据 -->
+                            <tr>
+                                <td>9</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每天</td>
+                                <td>步数记录,睡眠监测,饮食记录</td>
+                                <td>保持健康,数据记录</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>偶尔查看</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>女</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每周几次</td>
+                                <td>步数记录,心率监测</td>
+                                <td>减肥,数据记录</td>
+                                <td>非常不满意</td>
+                                <td>完全没帮助</td>
+                                <td>非常不愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>从不关注</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>男</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>很少使用</td>
+                                <td>步数记录,睡眠监测</td>
+                                <td>保持健康</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>是</td>
+                                <td>经常关注</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>女</td>
+                                <td>18-25</td>
+                                <td>学生</td>
+                                <td>每天</td>
+                                <td>步数记录,睡眠监测,心率监测,运动教程</td>
+                                <td>保持健康,运动激励,数据记录</td>
+                                <td>非常满意</td>
+                                <td>非常有帮助</td>
+                                <td>非常愿意</td>
+                                <td>是</td>
+                                <td>看奖励情况</td>
+                                <td>偶尔查看</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="analysis-content">
+                    <h3 style="margin-bottom: 1rem;">调查数据分析</h3>
+
+                    <div class="data-summary">
+                        <div class="summary-card">
+                            <h3>调查样本</h3>
+                            <div class="number">12人</div>
+                            <p>有效问卷数量</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>性别分布</h3>
+                            <div class="number">8男 / 4女</div>
+                            <p>男性用户较多</p>
+                        </div>
+                        <div class="summary-card">
+                            <h3>主要年龄</h3>
+                            <div class="number">18-25岁</div>
+                            <p>占比100%</p>
+                        </div>
+                    </div>
+
+                    <div class="chart-container">
+                        <h4 style="text-align: center; margin-bottom: 1rem;">使用频率分布</h4>
+                        <div style="display: flex; align-items: flex-end; justify-content: center; height: 80%; gap: 20px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="background-color: #4CAF50; width: 40px; height: 120px; border-radius: 4px;"></div>
+                                <div style="margin-top: 10px;">每天 (6人)</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="background-color: #2196F3; width: 40px; height: 60px; border-radius: 4px;"></div>
+                                <div style="margin-top: 10px;">每周几次 (3人)</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div style="background-color: #FF9800; width: 40px; height: 60px; border-radius: 4px;"></div>
+                                <div style="margin-top: 10px;">很少使用 (3人)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4>常用功能排名</h4>
+                            <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                                <li>步数记录 (12人)</li>
+                                <li>睡眠监测 (9人)</li>
+                                <li>心率监测 (8人)</li>
+                                <li>运动教程 (5人)</li>
+                                <li>饮食记录 (4人)</li>
+                            </ol>
+                        </div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4>使用目的分布</h4>
+                            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                                <li>数据记录 (10人)</li>
+                                <li>保持健康 (9人)</li>
+                                <li>减肥 (5人)</li>
+                                <li>运动激励 (4人)</li>
+                                <li>社交互动 (0人)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem;">
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4>满意度分析</h4>
+                            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                                <li>非常满意 (9人, 75%)</li>
+                                <li>非常不满意 (3人, 25%)</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; min-width: 300px;">
+                            <h4>连接手环意愿</h4>
+                            <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                                <li>是 (11人, 91.7%)</li>
+                                <li>不确定 (1人, 8.3%)</li>
+                                <li>否 (0人, 0%)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="findings-content">
+                    <h3 style="margin-bottom: 1rem;">主要研究发现</h3>
+
+                    <div class="interview-data">
+                        <h4><i class="fas fa-chart-bar"></i> 用户画像</h4>
+                        <p>主要用户为18-25岁的学生群体，男性用户占比66.7%。大多数用户有较高的健康意识，希望通过APP管理自己的健康状况。</p>
+                    </div>
+
+                    <div class="interview-data">
+                        <h4><i class="fas fa-check-circle"></i> 使用习惯</h4>
+                        <p>50%的用户每天使用健康APP，25%的用户每周使用几次，25%的用户很少使用。步数记录和睡眠监测是最受欢迎的功能，分别有100%和75%的用户使用。</p>
+                    </div>
+
+                    <div class="interview-data">
+                        <h4><i class="fas fa-exclamation-triangle"></i> 用户痛点</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>25%的用户对当前APP非常不满意</li>
+                            <li>部分用户认为APP对健康管理没有帮助</li>
+                            <li>广告过多和界面复杂是主要抱怨点</li>
+                            <li>50%的用户从不关注数据隐私政策</li>
+                        </ul>
+                    </div>
+
+                    <div class="interview-data">
+                        <h4><i class="fas fa-lightbulb"></i> 改进建议</h4>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>减少广告数量，提升用户体验</li>
+                            <li>简化界面设计，提高易用性</li>
+                            <li>增加更多实用功能</li>
+                            <li>提高数据隐私透明度</li>
+                            <li>优化智能手环连接体验</li>
+                        </ul>
+                    </div>
+
+                    <div class="interview-data">
+                        <h4><i class="fas fa-sort-amount-down"></i> 功能重要性排序</h4>
+                        <p>根据用户排序结果，功能重要性从高到低依次为：</p>
+                        <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                            <li>数据准确性</li>
+                            <li>界面简洁</li>
+                            <li>个性化建议</li>
+                            <li>提醒功能</li>
+                            <li>社交互动</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="analysis">
+        <h2 class="section-title">数据分析</h2>
+        <div class="analysis-content">
+            <p style="text-align: center; margin-bottom: 2rem;">基于收集的访谈和调查数据，我们进行了深入的数据分析，以下是分析结果：</p>
+
+            <div class="analysis-section">
+                <h3><i class="fas fa-comments"></i> 访谈数据分析</h3>
+                <p>通过对4名用户的深度访谈，我们获得了丰富的定性数据，以下是主要发现：</p>
+
+                <div class="interview-insights">
+                    <div class="insight-card">
+                        <h4>使用动机</h4>
+                        <ul>
+                            <li>健康问题和体重管理是主要使用动机</li>
+                            <li>外部建议（医生、朋友）是重要影响因素</li>
+                            <li>期望获得个性化健康建议和专业指导</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card">
+                        <h4>功能偏好</h4>
+                        <ul>
+                            <li>数据记录功能（步数、睡眠）最受欢迎</li>
+                            <li>用户希望获得更多个性化建议</li>
+                            <li>运动教程对初学者特别有帮助</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card">
+                        <h4>主要痛点</h4>
+                        <ul>
+                            <li>数据准确性是最大问题，影响用户信任</li>
+                            <li>界面复杂度过高，学习成本大</li>
+                            <li>广告干扰用户体验</li>
+                            <li>同步失败导致数据丢失</li>
+                        </ul>
+                    </div>
+
+                    <div class="insight-card">
+                        <h4>改进期望</h4>
+                        <ul>
+                            <li>提高数据准确性和同步稳定性</li>
+                            <li>简化界面设计，降低使用门槛</li>
+                            <li>减少广告数量，提升用户体验</li>
+                            <li>加强隐私保护，明确数据政策</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>访谈分析总结</h4>
+                <p>通过深度访谈，我们发现不同用户群体对健康APP的需求存在明显差异：</p>
+                <ul>
+                    <li><strong>年轻用户</strong>更关注运动教程、社交功能和个性化建议</li>
+                    <li><strong>上班族</strong>更注重数据准确性和时间效率</li>
+                    <li><strong>中老年用户</strong>偏好简单易用的界面和基础功能</li>
+                    <li>所有用户都期望更准确的数据和更少的广告干扰</li>
+                </ul>
+            </div>
+
+            <div class="analysis-section">
+                <h3><i class="fas fa-chart-bar"></i> 问卷数据分析</h3>
+                <p>通过对12份有效问卷的分析，我们获得了以下关键发现：</p>
+
+                <div class="questionnaire-insights">
+                    <div class="insight-row">
+                        <div class="insight-item">
+                            <h4>用户画像</h4>
+                            <p>主要用户为18-25岁的学生群体，男性用户占比66.7%</p>
+                        </div>
+                        <div class="insight-item">
+                            <h4>使用频率</h4>
+                            <p>50%用户每天使用，25%每周几次，25%很少使用</p>
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-item">
+                            <h4>常用功能</h4>
+                            <ul>
+                                <li>步数记录 (100%)</li>
+                                <li>睡眠监测 (75%)</li>
+                                <li>心率监测 (66.7%)</li>
+                                <li>运动教程 (41.7%)</li>
+                            </ul>
+                        </div>
+                        <div class="insight-item">
+                            <h4>使用目的</h4>
+                            <ul>
+                                <li>数据记录 (83.3%)</li>
+                                <li>保持健康 (75%)</li>
+                                <li>减肥 (41.7%)</li>
+                                <li>运动激励 (33.3%)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="insight-row">
+                        <div class="insight-item">
+                            <h4>满意度</h4>
+                            <p>75%用户对当前APP非常满意，25%非常不满意</p>
+                        </div>
+                        <div class="insight-item">
+                            <h4>连接手环意愿</h4>
+                            <p>91.7%用户愿意连接智能手环，8.3%不确定</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4>问卷分析总结</h4>
+                <ul>
+                    <li><strong>用户画像清晰：</strong>主要是18-25岁学生，男性居多</li>
+                    <li><strong>使用习惯明确：</strong>半数用户每天使用，步数记录是最核心功能</li>
+                    <li><strong>满意度较高：</strong>大多数用户对现有APP满意，认为有帮助</li>
+                    <li><strong>功能偏好明显：</strong>数据准确性最重要，社交功能最不重要</li>
+                    <li><strong>隐私关注不足：</strong>50%用户从不关注数据隐私政策</li>
+                </ul>
+            </div>
+
+            <div class="analysis-section">
+                <h3><i class="fas fa-project-diagram"></i> 亲和图分析</h3>
+                <p>我们通过对4名用户的深度访谈创建了亲和图，将35个关键洞察归纳为4个主要主题：</p>
+
+                <div class="affinity-process">
+                    <h4>亲和图创建过程</h4>
+                    <ol>
+                        <li><strong>数据提取：</strong>将访谈录音转录为文本，从中提取关键观点和洞察</li>
+                        <li><strong>初步分组：</strong>将相关的观点分组，形成初步的主题类别</li>
+                        <li><strong>主题提炼：</strong>进一步整合相关组，提炼出更高层次的主题</li>
+                        <li><strong>结构建立：</strong>确定主题之间的关系，建立层次结构</li>
+                        <li><strong>数字转化：</strong>将物理亲和图转化为数字版本</li>
+                    </ol>
+                </div>
+
+                <div class="affinity-diagram">
+                    <div class="theme-group">
+                        <div class="theme-title">主题一：使用动机与期望</div>
+                        <div class="note">健康问题驱动使用</div>
+                        <div class="note">体重管理是主要动机</div>
+                        <div class="note">医生建议开始使用</div>
+                        <div class="note">社交影响（朋友使用）</div>
+                        <div class="note">期望个性化健康建议</div>
+                        <div class="note">希望获得专业指导</div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-title">主题二：功能使用与体验</div>
+                        <div class="note">步数记录是最常用功能</div>
+                        <div class="note">睡眠监测受重视</div>
+                        <div class="note">运动教程对初学者有帮助</div>
+                        <div class="note">饮食记录功能使用较少</div>
+                        <div class="note">数据同步问题常见</div>
+                        <div class="note">界面复杂度过高</div>
+                        <div class="note">提醒功能过于频繁</div>
+                        <div class="note">喜欢成就系统和徽章</div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-title">主题三：痛点与障碍</div>
+                        <div class="note">数据不准确影响信任</div>
+                        <div class="note">同步失败导致数据丢失</div>
+                        <div class="note">电池续航问题</div>
+                        <div class="note">功能过于复杂</div>
+                        <div class="note">广告干扰用户体验</div>
+                        <div class="note">付费功能对学生不友好</div>
+                        <div class="note">缺乏适合中老年人的内容</div>
+                        <div class="note">社交功能不完善</div>
+                    </div>
+
+                    <div class="theme-group">
+                        <div class="theme-title">主题四：改进建议与未来期望</div>
+                        <div class="note">提高数据准确性</div>
+                        <div class="note">简化界面设计</div>
+                        <div class="note">减少广告数量</div>
+                        <div class="note">加强隐私保护</div>
+                        <div class="note">增加个性化建议</div>
+                        <div class="note">优化智能设备连接</div>
+                        <div class="note">提供更多免费功能</div>
+                        <div class="note">增加团体挑战功能</div>
+                        <div class="note">改善电池续航</div>
+                        <div class="note">增加适合不同年龄的内容</div>
+                    </div>
+                </div>
+
+                <h4>亲和图分析总结</h4>
+                <p>通过亲和图分析，我们获得了以下关键洞察：</p>
+                <ul>
+                    <li><strong>核心动机：</strong>用户主要因健康问题和体重管理开始使用健康APP，外部建议（医生、朋友）是重要影响因素。</li>
+                    <li><strong>功能偏好：</strong>数据记录功能（步数、睡眠）最受欢迎，但用户希望获得更多个性化建议和专业指导。</li>
+                    <li><strong>主要痛点：</strong>数据准确性是最大问题，影响用户信任；界面复杂度和广告干扰也是常见抱怨。</li>
+                    <li><strong>改进方向：</strong>用户期望更准确的数据、更简洁的界面、更少的广告和更好的隐私保护。</li>
+                    <li><strong>意外发现：</strong>不同年龄段用户的需求差异明显，年轻用户更关注运动教程和社交功能，而中年用户更关注简单易用的步数记录。</li>
+                    <li><strong>未满足需求：</strong>缺乏适合特定人群（如中老年人、学生）的定制化内容，团体互动功能也有待加强。</li>
+                </ul>
+            </div>
+
+            <div class="analysis-section">
+                <h3><i class="fas fa-lightbulb"></i> 综合结论与建议</h3>
+                <p>基于定量和定性数据的综合分析，我们提出以下产品优化建议：</p>
+
+                <div class="recommendations">
+                    <div class="recommendation-card">
+                        <h4>核心功能优化</h4>
+                        <ul>
+                            <li>提升数据准确性，增强用户信任</li>
+                            <li>优化数据同步稳定性，避免数据丢失</li>
+                            <li>简化界面设计，降低使用门槛</li>
+                        </ul>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <h4>用户体验改进</h4>
+                        <ul>
+                            <li>减少广告数量，提升用户体验</li>
+                            <li>优化提醒机制，允许用户自定义</li>
+                            <li>加强隐私保护，明确数据使用政策</li>
+                        </ul>
+                    </div>
+
+                    <div class="recommendation-card">
+                        <h4>功能扩展方向</h4>
+                        <ul>
+                            <li>增加个性化健康建议和运动计划</li>
+                            <li>改进社交功能，增加团体挑战</li>
+                            <li>提供适合不同年龄段的内容</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h4>优先级建议</h4>
+                <ol>
+                    <li><strong>高优先级：</strong>提升数据准确性、简化界面、减少广告</li>
+                    <li><strong>中优先级：</strong>优化同步稳定性、加强隐私保护、增加个性化建议</li>
+                    <li><strong>低优先级：</strong>改进社交功能、丰富内容多样性</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <section id="contribution">
+        <h2 class="section-title">贡献说明</h2>
+        <div class="contribution">
+            <div class="contrib-item">
+                <h3>陈静雯</h3>
+                <p><i class="fas fa-pencil-alt"></i> 访谈与记录</p>
+                <p>负责设计访谈大纲、问题及访谈记录，编写网站</p>
+            </div>
+            <div class="contrib-item">
+                <h3>姚思彤</h3>
+                <p><i class="fas fa-clipboard-list"></i> 调查问卷数据</p>
+                <p>负责问卷结构设计、题目编写与收集数据</p>
+            </div>
+            <div class="contrib-item">
+                <h3>周佳慧</h3>
+                <p><i class="fas fa-check-circle"></i> 内容审核与网站编写</p>
+                <p>负责整体内容审核、逻辑梳理与格式统一，编写网站</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2023 智能健康管理APP用户调研 - 人机交互实验课</p>
+        <p>团队成员：陈静雯 202200130048 | 周佳慧 202200130004 | 姚思彤 202200130281</p>
+    </div>
+</footer>
+
+<div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<script>
+    // 标签切换功能
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabs = document.querySelectorAll('.tab');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有标签和内容的active类
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // 为当前标签添加active类
+                this.classList.add('active');
+
+                // 显示对应的内容
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+
+        // 平滑滚动导航
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // 移除所有active类
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+                // 为当前链接添加active类
+                this.classList.add('active');
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--&lt;!&ndash;[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]&ndash;&gt;-->
+<!--&lt;!&ndash;[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]&ndash;&gt;-->
+<!--&lt;!&ndash;[if IE 8]>         <html class="no-js lt-ie9"> <![endif]&ndash;&gt;-->
+<!--&lt;!&ndash;[if gt IE 8]>&lt;!&ndash;> <html class="no-js"> &lt;!&ndash;<![endif]&ndash;&gt;-->
+<!--    <head>-->
+<!--        <meta charset="utf-8">-->
+<!--        <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--        <title></title>-->
+<!--        <meta name="description" content="">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+<!--        &lt;!&ndash; Place favicon.ico and apple-touch-icon.png in the root directory &ndash;&gt;-->
+
+<!--        <link rel="stylesheet" href="css/normalize.css">-->
+<!--        <link rel="stylesheet" href="css/main.css">-->
+<!--        <script src="js/vendor/modernizr-2.6.2.min.js"></script>-->
+<!--    </head>-->
+<!--    <body>-->
+<!--        &lt;!&ndash;[if lt IE 7]>-->
+<!--            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>-->
+<!--        <![endif]&ndash;&gt;-->
+
+<!--        &lt;!&ndash; Add your site or application content here &ndash;&gt;-->
+<!--        <p>Hello world! This is HTML5 Boilerplate.</p>-->
+
+<!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>-->
+<!--        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>-->
+<!--        <script src="js/plugins.js"></script>-->
+<!--        <script src="js/main.js"></script>-->
+
+<!--        &lt;!&ndash; Google Analytics: change UA-XXXXX-X to be your site's ID. &ndash;&gt;-->
+<!--        <script>-->
+<!--            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=-->
+<!--            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;-->
+<!--            e=o.createElement(i);r=o.getElementsByTagName(i)[0];-->
+<!--            e.src='//www.google-analytics.com/analytics.js';-->
+<!--            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));-->
+<!--            ga('create','UA-XXXXX-X');ga('send','pageview');-->
+<!--        </script>-->
+<!--    </body>-->
+<!--</html>-->
